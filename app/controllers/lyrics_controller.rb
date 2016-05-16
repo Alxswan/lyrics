@@ -6,7 +6,7 @@ class LyricsController < ApplicationController
   def index
     @lyrics = Lyric.all
     require 'open-uri'
-    @doc = Nokogiri::HTML(open("http://genius.com/Lin-manuel-miranda-alexander-hamilton-lyrics"))
+    @doc = Nokogiri::HTML(open("http://genius.com/Lin-manuel-miranda-my-shot-lyrics"))
     @words = @doc.css("div[class=song_body-lyrics]").css("a");
 
 

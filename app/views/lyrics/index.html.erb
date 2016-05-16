@@ -2,12 +2,12 @@
 
 <h1>Lyrics</h1>
 
-<h2><% @words.each do |line| %>
-
-<%= line.text %>
+<h2 class="lyrics">
+<% @words.each do |line| %>
+<%= line.text.strip %>
 <% end %>
-
 </h2>
+
 <table>
   <thead>
     <tr>
