@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lyrics</h1>
+
+<h2><% @words.each do |line| %>
+
+<%= line.text %>
+<% end %>
+
+</h2>
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lyrics.each do |lyric| %>
+      <tr>
+        <td><%= link_to 'Show', lyric %></td>
+        <td><%= link_to 'Edit', edit_lyric_path(lyric) %></td>
+        <td><%= link_to 'Destroy', lyric, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lyric', new_lyric_path %>
