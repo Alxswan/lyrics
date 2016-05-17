@@ -24,9 +24,17 @@ $(document).ready(function(){
   }
   console.log(obj.Noun.colour)
 
-  $('.lyrics').empty();
-  var $p = $("<p class='colours'/>");
+  $('.lyrics').hide();
+  var $p = $("<p class='colours'/>").css("text-align", "center");
+  var $p2 = $("<p class='types'/>")
+  var $p3 = $("<p class='instructions'/>");
+  $p3.text("?song=FirstName-LastName-Song-Name-Lyrics").css("text-align", "center")
+  $p2.css("font-size", "10px");
+  $p2.css("margin", "auto").css("text-align", "center");
+  $('body').append($p2);
   $('body').append($p);
+  $('body').append($p3);
+
 
   for (var i = 0; i < array.length; i++){
     var word = array[i].text;
@@ -38,6 +46,16 @@ $(document).ready(function(){
     $p.css("font-size", "20px");
     }
   }
+
+  for (var i = 0; i < unique.length; i++){
+    var word = unique[i];
+    var colour = obj[word].colour;
+    var $span =$('<span> '+word+' </span>').css("color", colour);
+    $p2.append($span);
+ 
+    $('h2').css("text-align", "center")
+  }
+
 
 function getRandomColor() {
   var colours = 
