@@ -3,28 +3,37 @@ $(document).ready(function(){
   var nlp = window.nlp_compromise;
 
   var lyric = $('.lyrics').text();
-lyric = lyric.replace(/(\r\n|\n|\r)/gm, " ");
-  console.log(lyric);
+  lyric = lyric.replace(/(\r\n|\n|\r)/gm, " ");
   var parsed = nlp.sentence(lyric)
   var tags = parsed.tags();
-  console.log(parsed);
-  console.log(tags);
-  console.log(parsed.topics());
 
-  var noun = tags.reduce(function(n, val) {
-    return n + (val === "Noun");
+  //console.log(parsed.topics());
+
+  function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+  }
+
+  var unique = tags.filter( onlyUnique );
+  console.log(unique.length);
+  var obj = {};
+
+  for (var i = 0; i < unique.length; i++){
+    var count = tags.reduce(function(n, val) {
+    return n + (val === unique[i]);
 }, 0);
+     obj[unique[i]] = {"count": count, "colour": getRandomColor()};
+  }
+  console.log(obj)
 
-
-  var adj = tags.reduce(function(n, val) {
-    return n + (val === "Adjective");
-}, 0);
-  console.log(noun)
-  console.log(adj)
-
-  var sort = parsed.terms.sort();
-  console.log(sort);
-
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+  
 
   // var find = parsed.terms.find(function(thing) {
   //   if (nlp.text(thing) === 'Person');
