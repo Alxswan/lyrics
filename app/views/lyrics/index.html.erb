@@ -1,12 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Lyrics</h1>
-
-<h2 class="lyrics">
+<p class="lyrics">
 <% @words.each do |line| %>
-<%= line.text.strip %>
+<%= line.text.strip %><br>
 <% end %>
-</h2>
+</p>
 
 <table>
   <thead>
@@ -26,6 +22,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Lyric', new_lyric_path %>
