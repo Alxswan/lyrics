@@ -24,8 +24,22 @@ $(document).ready(function(){
   }
   console.log(obj.Noun.colour)
 
-  function getRandomColor() {
+  $('.lyrics').empty();
+  var $p = $("<p class='colours'/>");
+  $('body').append($p);
 
+  for (var i = 0; i < array.length; i++){
+    var word = array[i].text;
+    var type = array[i].tag;
+    if (type){
+    var colour = obj[type].colour;
+    var $span =$('<span> '+word+' </span>').css("color", colour);
+    $p.append($span);
+    $p.css("font-size", "20px");
+    }
+  }
+
+function getRandomColor() {
   var colours = 
         ["#ff3333",
         "#ff6633", 
@@ -55,35 +69,6 @@ $(document).ready(function(){
 
     var colour = Math.floor(Math.random() * colours.length);
     return colours[colour];
-    // var letters = '0123456789ABCDEF'.split('');
-    // var color = '#';
-    // for (var i = 0; i < 6; i++ ) {
-    //     color += letters[Math.floor(Math.random() * 16)];
-    // }
-    //return color;
 }
-  $('.lyrics').empty();
-  var $p = $("<p class='colours'/>");
-  $('body').append($p);
-
-  for (var i = 0; i < array.length; i++){
-    var word = array[i].text;
-    var type = array[i].tag;
-    if (type){
-    var colour = obj[type].colour;
-    var $span =$('<span> '+word+' </span>').css("color", colour);
-    $p.append($span);
-    $p.css("font-size", "20px");
-    }
-  }
-
-
-
-  // var find = parsed.terms.find(function(thing) {
-  //   if (nlp.text(thing) === 'Person');
-  //   return thing;
-  // })
-  // console.log(find);
-
 
 });
