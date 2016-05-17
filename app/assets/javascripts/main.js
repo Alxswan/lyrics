@@ -6,14 +6,12 @@ $(document).ready(function(){
   var parsed = nlp.sentence(lyric)
   var tags = parsed.tags();
   var array = parsed.terms;
-  console.log(parsed.terms[590]);
 
   function onlyUnique(value, index, self) { 
     return self.indexOf(value) === index;
   }
 
   var unique = tags.filter( onlyUnique );
-  console.log(unique.length);
   var obj = {};
 
   for (var i = 0; i < unique.length; i++){
@@ -22,7 +20,6 @@ $(document).ready(function(){
 }, 0);
     obj[unique[i]] = {"count": count, "colour": getRandomColor()};
   }
-  console.log(obj.Noun.colour)
 
   $('.lyrics').hide();
   var $p = $("<p class='colours'/>").css("text-align", "center");
@@ -41,7 +38,10 @@ $(document).ready(function(){
     var type = array[i].tag;
     if (type){
     var colour = obj[type].colour;
-    var $span =$('<span> '+word+' </span>').css("color", colour);
+      if (type == '?'){
+        type = 'unknown'
+      }
+    var $span =$('<span> '+word+' </span>').css("color", colour).addClass(type);
     $p.append($span);
     $p.css("font-size", "20px");
     }
@@ -50,11 +50,36 @@ $(document).ready(function(){
   for (var i = 0; i < unique.length; i++){
     var word = unique[i];
     var colour = obj[word].colour;
-    var $span =$('<span> '+word+' </span>').css("color", colour);
+    var $span =$('<span> '+word+' </span>').css("color", colour).addClass(word);
     $p2.append($span);
  
     $('h2').css("text-align", "center")
   }
+
+$('.colours span').on('mouseover', function(){
+  var c = $(this).attr("class"); 
+   $(this).css('font-size', '45px'); 
+   $('.types span' + '.' + c).css('font-size', '30px');
+})
+
+$('.colours span').on('mouseout', function(){
+  var c = $(this).attr("class"); 
+   $(this).css('font-size', '20px'); 
+   $('.types span' + '.' + c).css('font-size', '10px');
+})
+
+$('.types span').on('mouseover', function(){
+  var c = $(this).attr("class"); 
+   $(this).css('font-size', '30px'); 
+   $('.colours span' + '.' + c).css('font-size', '40px');
+})
+
+$('.types span').on('mouseout', function(){
+  var c = $(this).attr("class"); 
+   $(this).css('font-size', '10px'); 
+   $('.colours span' + '.' + c).css('font-size', '20px');
+})
+
 
 
 function getRandomColor() {
