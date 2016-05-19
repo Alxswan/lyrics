@@ -26,13 +26,11 @@ $(document).ready(function(){
   $('.lyrics').hide();
   var $p = $("<p class='colours'/>").css("text-align", "center");
   var $p2 = $("<p class='types'/>")
-  var $p3 = $("<p class='instructions'/>");
-  $p3.text("?song=FirstName-LastName-Song-Name-Lyrics").css("text-align", "center")
+
   $p2.css("font-size", "10px");
   $p2.css("margin", "auto").css("text-align", "center");
-  $('body').append($p2);
-  $('body').append($p);
-  $('body').append($p3);
+  $('.guts').append($p2);
+  $('.guts').append($p);
 
 
   for (var i = 0; i < array.length; i++){

@@ -4,7 +4,19 @@
 <% end %>
 </p>
 <h2>
-<%= @query %>
+<%= @query.split('-').join(' ').titleize %>
 </h2>
 
+<div class="guts"></div>
 
+<div class="search">
+<%= form_tag("/", method: "get") do %>
+  <%= label_tag(:q, "Artist:") %>
+  <%= text_field_tag(:artist) %>
+  <%= label_tag(:song, "Song:") %>
+  <%= text_field_tag(:song) %>
+  <%= submit_tag("Hit it") %>
+<% end %>
+
+<p>?genius=FirstName-LastName-Song-Name-Lyrics</p>
+</div>
