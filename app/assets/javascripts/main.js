@@ -2,10 +2,12 @@ $(document).ready(function(){
   var nlp = window.nlp_compromise;
 
   var lyric = $('.lyrics').text();
+  console.log(lyric);
   lyric = lyric.replace(/(\r\n|\n|\r)/gm, " ");
   var parsed = nlp.sentence(lyric)
   var tags = parsed.tags();
   var array = parsed.terms;
+ 
 
   function onlyUnique(value, index, self) { 
     return self.indexOf(value) === index;
@@ -49,8 +51,13 @@ $(document).ready(function(){
 
   for (var i = 0; i < unique.length; i++){
     var word = unique[i];
+    if (word != '?') {
+      var newClass = word;
+    } else {
+      var newClass = 'unknown';
+    }
     var colour = obj[word].colour;
-    var $span =$('<span> '+word+' </span>').css("color", colour).addClass(word);
+    var $span =$('<span> '+word+' </span>').css("color", colour).addClass(newClass);
     $p2.append($span);
  
     $('h2').css("text-align", "center")
@@ -79,7 +86,6 @@ $('.types span').on('mouseout', function(){
    $(this).css('font-size', '10px'); 
    $('.colours span' + '.' + c).css('font-size', '20px');
 })
-
 
 
 function getRandomColor() {
